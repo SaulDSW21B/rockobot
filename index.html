@@ -4,69 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROCKOBOT</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0b0b0b;
+        }
+
+        .contenido{
+            position: fixed;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        h1{color: white;}
+        h2{color: white;}
+
+        /* Estilo para limitar el tamaño de la imagen */
+        .mi-imagen {
+            max-width: 100%;
+            max-height: 100%;
+            transition: opacity 0.5s; /* Transición de desvanecimiento */
+        }
+
+        /* Estilo para el chat */
+        #dialogflow-iframe {
+            display: block;
+            opacity: 0;
+            transform: translateY(-20px); /* El chat está inicialmente desplazado hacia arriba */
+            transition: opacity 0.5s, transform 0.5s; /* Transición de opacidad y desplazamiento */
+        }
+
+        .chat-abierto #dialogflow-iframe {
+            opacity: 1;
+            transform: translateY(0); /* El chat se desplaza hacia abajo cuando se abre */
+        }
+    </style>
 </head>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #0b0b0b;
-    }
-
-    .heart{
-        height: 150px;
-        width: 150px;
-        background-color: red;
-        position: relative;
-        transform: rotate(45deg);
-        box-shadow: -20px 20px 150px #f20044;
-        animation: palpitar 0.4s linear infinite alternate;
-    }
-
-    .contenido{
-        position: fixed;
-        margin-bottom: 50px;
-        text-align: center;
-    }
-    h1{color: white;}
-    h2{color: white;}
-
-    @keyframes palpitar{
-        0%{transform: rotate(45deg)scale(1.10);}
-        80%{transform: rotate(45deg)scale(1.0);}
-        100%{transform: rotate(45deg)scale(0.8);}
-    }
-
-    .heart::before{
-        content: "";
-        position: absolute;
-        height: 150px;
-        width: 150px;
-        background: red;
-        right: 50%;
-        border-radius: 50%;
-        box-shadow: 20px 20px 150px #f20044;
-    }
-
-    .heart::after{
-        content: "";
-        position: absolute;
-        height: 150px;
-        width: 150px;
-        background: red;
-        top: -50%;
-        border-radius: 50%;
-        box-shadow: 20px 20px 150px #f20044;
-    }
-</style>
 <body>
 
-    <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/6b074830-2904-40f4-a673-def1714bb4fc"></iframe>
+    
 
-    
-    
+    <div>
+        <div class="mi-imagen" onclick="toggleDialogflow()">
+            <img src="rockobot.png" alt="Texto alternativo" width="150" height="150">
+        </div>
+    </div>
+
+    <iframe id="dialogflow-iframe" width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/6b074830-2904-40f4-a673-def1714bb4fc"></iframe>
+
+    <script>
+        function toggleDialogflow() {
+            var iframe = document.getElementById("dialogflow-iframe");
+            var imagen = document.querySelector(".mi-imagen");
+
+            if (iframe.style.opacity === "" || iframe.style.opacity === "0") {
+                iframe.style.opacity = "1";
+                iframe.style.transform = "translateY(0)";
+                imagen.style.opacity = "0.5";
+            } else {
+                iframe.style.opacity = "0";
+                iframe.style.transform = "translateY(-20px)";
+                imagen.style.opacity = "1";
+            }
+        }
+    </script>
 </body>
 </html>
